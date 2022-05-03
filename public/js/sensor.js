@@ -13,7 +13,7 @@ $(document).ready(() => {
 			console.error(err);
 		}
 	}
-	var sasToken ="SharedAccessSignature sr=ForestGuardHub.azure-devices.net%2Fdevices&sig=QmHzWZ43AJtRnTYSqUpt9DjbMSXmRVUGeC7T5C%2FcnC0%3D&se=1649891549&skn=registryRead";
+	var sasToken ="SharedAccessSignature sr=ForestGuardHub.azure-devices.net%2Fdevices&sig=BGF13d3dwHx6prtH1EagumdyM2MSCwBDOZWoYWHSsZc%3D&se=1651816603&skn=registryRead";
 const api_url =
 	"https://ForestGuardHub.azure-devices.net/devices?api-version=2020-05-31-preview";
 
@@ -49,10 +49,9 @@ function show(data) {
 	`<tr>
 	<th>Device ID</th>
 	<th>Generation Id</th>
-	<th>Guard-InCharge</th>
 	<th>Status</th>
 	<th>Last Activity Time</th>
-	<th>Summary</th>
+	<th>Status Updated Time</th>
 </tr>`;
 	
 	// Loop to access all rows
@@ -60,7 +59,6 @@ function show(data) {
 		tab += `<tr>
 	<td>${r.deviceId} </td>
 	<td>${r.generationId}</td>
-	<td>${r.status}</td>
 	<td>${r.status}</td>
 	<td>${r.lastActivityTime}</td>
 	<td>${r.statusUpdatedTime}</td>		
