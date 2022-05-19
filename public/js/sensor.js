@@ -13,7 +13,7 @@ $(document).ready(() => {
 			console.error(err);
 		}
 	}
-	var sasToken ="SharedAccessSignature sr=ForestGuardHub.azure-devices.net%2Fdevices&sig=BGF13d3dwHx6prtH1EagumdyM2MSCwBDOZWoYWHSsZc%3D&se=1651816603&skn=registryRead";
+	var sasToken ="SharedAccessSignature sr=ForestGuardHub.azure-devices.net%2Fdevices&sig=cezUh4ztclhsWdv1UfFTVc3Ug1Nn2yq%2FYjJfQtLHJpE%3D&se=3812949422&skn=registryRead";
 const api_url =
 	"https://ForestGuardHub.azure-devices.net/devices?api-version=2020-05-31-preview";
 
@@ -31,7 +31,7 @@ async function getapi(url) {
 	// Storing data in form of JSON
 	var data = await response.json();
 	console.log(data);
-	if (response) {
+	if (data) {
 	show(data);
 }
 }
@@ -48,20 +48,20 @@ function show(data) {
 	let tab =
 	`<tr>
 	<th>Device ID</th>
-	<th>Generation Id</th>
+	<th>Guard_In_Charge</th>
 	<th>Status</th>
 	<th>Last Activity Time</th>
-	<th>Status Updated Time</th>
+	<th>Connection State</th>
 </tr>`;
 	
 	// Loop to access all rows
 	for (let r of data) {
 		tab += `<tr>
 	<td>${r.deviceId} </td>
-	<td>${r.generationId}</td>
+	<td>+254792816828</td>
 	<td>${r.status}</td>
-	<td>${r.lastActivityTime}</td>
-	<td>${r.statusUpdatedTime}</td>		
+	<td>${new Date(r.lastActivityTime).toLocaleString()}</td>
+	<td>${r.connectionState}</td>
 </tr>`;
 	}
 	// Setting innerHTML as tab variable

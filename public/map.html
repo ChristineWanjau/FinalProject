@@ -16,7 +16,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ForestGuard</title>
+    <title>ForestGuard</title>
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/site.css" asp-append-version="true" />
     <!-- Custom fonts for this template-->
@@ -34,10 +34,26 @@
     async defer></script>
 
 <script type='text/javascript'>
+
+var getLocations = function(mapObj, latitude, longtitude)
+        {
+            console.log("map pins");
+            for (var i = 0; i < latitude.length; i++)
+            {
+                var pushpin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(latitude[i],longtitude[i]), null);
+                mapObj.entities.push(pushpin);
+            }
+        }
+
+
 function GetMap()
 {
 var map = new Microsoft.Maps.Map('#myMap');
+var lats = [-1.286389,-1.362863,-1.2368];
+var longs = [36.817223,36.834583,36.8304];
 
+map.entities.clear();
+getLocations(map, lats, longs);
 //Add your post map load code here.
 }
 </script>
@@ -56,7 +72,7 @@ var map = new Microsoft.Maps.Map('#myMap');
     
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="index">
+                    <a class="nav-link" href="index.html">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Forest Guard</span></a>
                 </li>
@@ -64,7 +80,7 @@ var map = new Microsoft.Maps.Map('#myMap');
     
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="map.html">
                         <i class="fas fa-fw fa-cog"></i>
                         <span>Map</span>
                     </a>
@@ -72,7 +88,7 @@ var map = new Microsoft.Maps.Map('#myMap');
     
                 <!-- Nav Item - Utilities Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link" href="about">
+                    <a class="nav-link" href="sensor.html">
                         <i class="fas fa-fw fa-wrench"></i>
                         <span>Sensors</span>
                     </a>
@@ -87,11 +103,6 @@ var map = new Microsoft.Maps.Map('#myMap');
                 </li>
     
                 <!-- Nav Item - Charts -->
-                <li class="nav-item">
-                    <a class="nav-link" href="privacy">
-                        <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Settings</span></a>
-                </li>
     
             </ul>
             <!-- End of Sidebar -->
@@ -139,32 +150,6 @@ var map = new Microsoft.Maps.Map('#myMap');
                                 </div>
                             </li>
     
-                            <!-- Nav Item - Alerts -->
-                            <li class="nav-item dropdown no-arrow mx-1">
-                                <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-bell fa-fw"></i>
-                                    <!-- Counter - Alerts -->
-                                    <span class="badge badge-danger badge-counter">3+</span>
-                                </a>
-                                <!-- Dropdown - Alerts -->
-                                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                    aria-labelledby="alertsDropdown">
-                                   
-            
-                                </div>
-                            </li>
-    
-                            <!-- Nav Item - Messages -->
-                            <li class="nav-item dropdown no-arrow mx-1">
-                                <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-envelope fa-fw"></i>
-                                    <!-- Counter - Messages -->
-                                    <span class="badge badge-danger badge-counter">7</span>
-                                </a>
-                                
-                            </li>
     
                             <li class="topbar-divider d-none d-sm-block"></li>
     

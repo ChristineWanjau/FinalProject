@@ -4,6 +4,10 @@ const WebSocket = require('ws');
 const path = require('path');
 const crypto = require('crypto');
 const EventHubReader = require('./scripts/event-hub-reader.js');
+const forestCosmos = require('./scripts/comos.js');
+const config = require('./scripts/config.js');
+const { ok } = require('assert');
+
 
 var generateSasToken = function(resourceUri, signingKey, policyName, expiresInMins) {
   resourceUri = encodeURIComponent(resourceUri);
@@ -25,7 +29,7 @@ var generateSasToken = function(resourceUri, signingKey, policyName, expiresInMi
   return token;
 };
 
-var sasToken = generateSasToken("ForestGuardHub.azure-devices.net/devices", "TG/MUc52slMFZXo/ul3Ntqt+DMKtbN1ODOs+/uemvUk=", "registryRead",3600);
+var sasToken = generateSasToken("ForestGuardHub.azure-devices.net/devices", "TG/MUc52slMFZXo/ul3Ntqt+DMKtbN1ODOs+/uemvUk=", "registryRead",36000000);
 
 console.log(sasToken);
 
@@ -48,9 +52,6 @@ console.log(`Using event hub consumer group [${eventHubConsumerGroup}]`);
 // Redirect requests to the public subdirectory to the root
 const app = express();
 app.use(express.static(path.join(__dirname, 'public')));
-app.use((req, res /* , next */) => {
-  res.redirect('/');
-});
 
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
@@ -79,9 +80,32 @@ var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds(
 return time;
 }
 const eventHubReader = new EventHubReader(iotHubConnectionString, eventHubConsumerGroup);
+const forest = new forestCosmos(config.endpoint,config.key,config.databaseId,config.containerId,config.partitionKey);
+const forestAlert = new forestCosmos(config.endpoint,config.key,config.databaseId,config.containerId,config.partitionKey);
+
+app.get('/getAlerts', function (req, res) {
+(async () => {
+  const items = await forest.main(() => {
+    try {
+     console.log("working")
+    
+    } catch (err) {
+      console.error('Error');
+    }
+  });
+  res.json(items);
+})().catch();
+});
+
+app.get('/deleteAlerts/:id', function (req, res) {
+  const { id } = req.params.id;
+  console.log(id);
+  (async () => { await forest.deleteItem(id) })().catch();
+  res.send(ok);
+});
 
 (async () => {
-  await eventHubReader.startReadMessage((message, date, deviceId) => {
+  await eventHubReader.startReadMessage((id,message, date, deviceId) => {
     try {
       const payload = {
         IotData: message,
@@ -90,7 +114,6 @@ const eventHubReader = new EventHubReader(iotHubConnectionString, eventHubConsum
       };
 
       wss.broadcast(JSON.stringify(payload));
-    
     } catch (err) {
       console.error('Error broadcasting: [%s] from [%s].', err, message);
     }

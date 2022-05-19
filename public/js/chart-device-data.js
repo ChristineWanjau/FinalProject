@@ -11,10 +11,10 @@ $(document).ready(() => {
     constructor(deviceId) {
       this.deviceId = deviceId;
       this.maxLen = 50;
-      this.timeData = new Array(this.maxLen);
-      this.temperatureData = new Array(this.maxLen);
-      this.humidityData = new Array(this.maxLen);
-      this.air_qualityData = new Array(this.maxLen);
+      this.timeData = new Array("09:06","09:12","09:15","09:18","09:21","09:24","09:27","09:30","09:33","09:36","09:39","09:42","09:45");
+      this.temperatureData = new Array(23,24,25,27,29,34,33,23,34,23,24,25,26);
+      this.humidityData = new Array(40,45,50,45,38,40,34,35,40,34,34,35,36);
+      this.air_qualityData = new Array(15,26,13,12,11,13,14,25,26,20,19,13,12);
     }
 
     addData(time, temperature, humidity,air_quality) {

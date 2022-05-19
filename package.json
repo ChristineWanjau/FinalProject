@@ -10,6 +10,7 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "@azure/cosmos": "^3.15.1",
     "@azure/event-hubs": ">=5.0.2",
     "browserify": "^17.0.0",
     "buffer": "^5.5.0",

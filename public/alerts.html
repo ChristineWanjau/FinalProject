@@ -17,7 +17,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ForestGuard</title>
+    <title>ForestGuard</title>
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/site.css" asp-append-version="true" />
     <!-- Custom fonts for this template-->
@@ -46,7 +46,7 @@
     
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="index">
+                    <a class="nav-link" href="index.html">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Forest Guard</span></a>
                 </li>
@@ -54,7 +54,7 @@
     
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="map.html">
                         <i class="fas fa-fw fa-cog"></i>
                         <span>Map</span>
                     </a>
@@ -62,7 +62,7 @@
     
                 <!-- Nav Item - Utilities Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link" href="about">
+                    <a class="nav-link" href="sensor.html">
                         <i class="fas fa-fw fa-wrench"></i>
                         <span>Sensors</span>
                     </a>
@@ -70,18 +70,12 @@
     
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="alerts.html">
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Alerts</span>
                     </a>
                 </li>
     
-                <!-- Nav Item - Charts -->
-                <li class="nav-item">
-                    <a class="nav-link" href="privacy">
-                        <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Settings</span></a>
-                </li>
     
             </ul>
             <!-- End of Sidebar -->
@@ -100,20 +94,7 @@
                             <i class="fa fa-bars"></i>
                         </button>
     
-                        <!-- Topbar Search -->
-                        <form
-                            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                            <div class="input-group">
-                                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                    aria-label="Search" aria-describedby="basic-addon2">
-                                <div class="input-group-append">
-                                    <button class="btn btn-success" type="button">
-                                        <i class="fas fa-search fa-sm"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-    
+                
                         <!-- Topbar Navbar -->
                         <ul class="navbar-nav ml-auto">
     
@@ -142,32 +123,6 @@
                             </li>
     
                             <!-- Nav Item - Alerts -->
-                            <li class="nav-item dropdown no-arrow mx-1">
-                                <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-bell fa-fw"></i>
-                                    <!-- Counter - Alerts -->
-                                    <span class="badge badge-danger badge-counter">3+</span>
-                                </a>
-                                <!-- Dropdown - Alerts -->
-                                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                    aria-labelledby="alertsDropdown">
-                                   
-            
-                                </div>
-                            </li>
-    
-                            <!-- Nav Item - Messages -->
-                            <li class="nav-item dropdown no-arrow mx-1">
-                                <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-envelope fa-fw"></i>
-                                    <!-- Counter - Messages -->
-                                    <span class="badge badge-danger badge-counter">7</span>
-                                </a>
-                                
-                            </li>
-    
                             <li class="topbar-divider d-none d-sm-block"></li>
     
                             <!-- Nav Item - User Information -->

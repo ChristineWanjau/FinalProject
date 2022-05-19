@@ -3,23 +3,19 @@
 /* eslint-disable no-undef */
 $(document).ready(() => {
     // if deployed to a site supporting SSL, use wss://
-    const protocol = document.location.protocol.startsWith('https') ? 'wss://' : 'ws://';
-    const webSocket = new WebSocket(protocol + location.host);
     var count = 0
     var arr = [];
-
-    async function fetchAlerts() {
-      let response = await fetch('https://forestguardapi20220502114450.azurewebsites.net/Alerts');
-      let data = await response.json();
-      if(arr.length == data.length){
-         console.log("no new data");
-      }
-      else{
-        var diff = parseInt(data.length)-parseInt(arr.length);
-        arr = data;
-        for (let i = 0; i<diff; i++){
-        index = (parseInt(arr.length)-diff)+i;
-        console.log(index);
+    var data = [];
+ 
+    function fetchdata(){
+    let request = new XMLHttpRequest();
+    request.open("GET","http://localhost:3000/getAlerts");
+    request.send()
+    request.onload = () =>{
+      console.log("fetching values");
+      data = JSON.parse(request.response);
+      for (let i = 0; i<data.length; i++){
+        console.log("displaying data");
         var card = document.createElement('div');
         card.className = 'card';
         card.setAttribute('id',count); 
@@ -33,46 +29,43 @@ $(document).ready(() => {
             //     x.appendChild(l);
             //   })
         var l = document.createElement('p');
-        l.innerHTML = "Warning: Temperatures too high "+data[index].temperature;
+        var f = document.createElement('p');
+        l.innerHTML = "Alert Sent to "+data[i].guard_in_charge + " Location :"+data[i].location;
+        f.innerHTML ="Time: " +data[i].time + " Alert: " + data[i].alert;
         document.getElementById(count).appendChild(l);
-
+        document.getElementById(count).appendChild(f);
         // var bt = document.createElement('button');
+        // bt.className = 'btn-close';
         // bt.setAttribute('id','btn'+count);
         // document.getElementById(count).appendChild(bt);  
         // var button = document.getElementById('btn'+count);
-        // button.onclick = removeAlert(count);
-        // console.log(button);
-        count = count+1;
-        console.log(count);
-        console.log('alert');       
-        }   
-        
-       
+        // window.onload = () => {
+        //   document.getElementById('btn'+count).onclick = function() {
+        //     this.parentNode.remove()
+        //     return false;
+        //   };
+        // };
+        count = count+1;      
+}
     }
-        
-      
-  }
-
-  function removeAlert(id){
-
-    var el = document.getElementById(id);
-    el.remove();
-
-  }
-
-  function deleteAlert(Alertid){
-  fetch('https://forestguardapi20220502114450.azurewebsites.net/Alerts', {
-  method: "DELETE",
-  headers: {"Content-type": "application/json;charset=UTF-8"},
-  body: {id : Alertid}
-})
-  .then(response => response.json()) 
-  .then(json => console.log(json))
 }
 
-setInterval(function () {
+        
+      
+
+
+
+//   function deleteAlert(Alertid){
+//   fetch('https://forestguardapi20220502114450.azurewebsites.net/Alerts', {
+//   method: "DELETE",
+//   headers: {"Content-type": "application/json;charset=UTF-8"},
+//   body: {id : Alertid}
+// })
+//   .then(response => response.json()) 
+//   .then(json => console.log(json))
+// }
+
   //   //Call to method which will send notification
   //   // If you have specific endpoint then call to that endpoint
-  fetchAlerts();
- },3000 );
+  fetchdata();
 });
